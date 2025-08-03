@@ -1,6 +1,20 @@
-let totalTime = 900; // Tiempo total en segundos
+// script.js con Pop-up de Configuración
+
+let totalTime = 900; // Tiempo por defecto: 15 minutos (900 segundos)
 let remainingTime = totalTime;
 let timerElement = document.getElementById('timer');
+
+// Mostrar pop-up para configurar el tiempo
+function showTimePopup() {
+    let minutes = prompt("Ingresa la duración en minutos (ej. 15 para 15 minutos):", "15");
+    let seconds = parseInt(minutes) * 60;
+    
+    if (!isNaN(seconds) && seconds > 0) {
+        totalTime = seconds;
+        remainingTime = totalTime;
+        timerElement.textContent = formatTime(remainingTime);
+    }
+}
 
 function updateBackgroundColor() {
     let elapsed = totalTime - remainingTime;
@@ -36,5 +50,7 @@ function startTimer() {
     }, 1000);
 }
 
+// Mostrar pop-up al cargar la página
+showTimePopup();
 timerElement.textContent = formatTime(remainingTime);
 startTimer();
